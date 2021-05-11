@@ -31,8 +31,7 @@
 //  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 
-//  Moified by ignasiperez.com on 10/05/2021.
-
+//  Modified by ignasiperez.com on 10/05/2021.
 
 import UIKit
 
@@ -46,7 +45,7 @@ final class TileView: UIView {
   
   private let blueView: UIView = {
     let view = UIView()
-    view.backgroundColor = .blue
+    view.backgroundColor = .systemBlue
     return view
   }()
   
