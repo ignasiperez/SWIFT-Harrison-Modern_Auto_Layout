@@ -1,6 +1,6 @@
 /**
  * FILE:
- * Challenge4-1/Challenge4-1/ViewController.swift */
+ * Challenge5-1/Challenge5-1/AppDelegate.swift */
 
 //  Created by Keith Harrison https://useyourloaf.com
 //  Copyright (c) 2018 Keith Harrison. All rights reserved.
@@ -31,16 +31,25 @@
 //  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 
-//  Modified by Ignasi Perez on 17/05/2021.
+//  Modified by Ignasi Perez on 23/05/2021.
 
 import UIKit
 
 
-class ViewController: UIViewController {
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+  var window: UIWindow?
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    // Override point for customization after application launch.
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.backgroundColor = .white
+    window?.rootViewController = ViewController()
+    window?.makeKeyAndVisible()
+    return true
   }
 
 }
