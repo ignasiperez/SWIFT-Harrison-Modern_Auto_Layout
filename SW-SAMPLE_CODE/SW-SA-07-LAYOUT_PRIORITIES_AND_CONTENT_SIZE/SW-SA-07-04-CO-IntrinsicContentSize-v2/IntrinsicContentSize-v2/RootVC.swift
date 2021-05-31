@@ -1,6 +1,6 @@
 /**
  * FILE:
- * Anchors-v3/Anchors-v3/ViewController.swift */
+ * IntrinsicSize-v2/IntrinsicSize-v2/RootVC.swift */
 
 //  Created by Keith Harrison https://useyourloaf.com
 //  Copyright (c) 2018 Keith Harrison. All rights reserved.
@@ -31,18 +31,23 @@
 //  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 
-//  Modified by Ignasi Perez on 25/05/2021.
+//  Modified by Ignasi Perez on 29/05/2021.
 
 import UIKit
 
-
-final class ViewController: UIViewController {
-  
-  private let padding: CGFloat = 50.0
-  private let spacing: CGFloat = 25.0
-  
-  private let redView = UIView.makeView(color: .systemPink)
-  private let greenView = UIView.makeView(color: .systemGreen)
+final class RootVC: UIViewController {
+  private lazy var helloButton: UIButton = {
+    let title = NSLocalizedString("Hello",
+                                  comment: "Hello button")
+    
+    let button = UIButton.customButton(
+      title: title,
+      titleColor: .white,
+      tintColor: .systemGreen,
+      background: UIImage(named: "buttonTemplate")
+    )
+    return button
+  }()
   
   
   override func viewDidLoad() {
@@ -52,51 +57,48 @@ final class ViewController: UIViewController {
   
   
   private func setupView() {
-    view.backgroundColor = .systemYellow
-    view.addSubview(redView)
-    view.addSubview(greenView)
+    view.addSubview(helloButton)
     
-    // Add constraints here
     let guide = view.safeAreaLayoutGuide
     NSLayoutConstraint.activate([
-      redView.leadingAnchor
-        .constraint(equalTo: guide.leadingAnchor,
-                    constant: padding),
-      greenView.leadingAnchor
-        .constraint(equalTo: guide.leadingAnchor,
-                    constant: padding),
-      
-      guide.trailingAnchor
-        .constraint(equalTo: redView.trailingAnchor,
-                    constant: padding),
-      guide.trailingAnchor
-        .constraint(equalTo: greenView.trailingAnchor,
-                    constant: padding),
-      
-      redView.topAnchor
-        .constraint(equalTo: guide.topAnchor,
-                    constant: padding),
-      greenView.topAnchor
-        .constraint(equalTo: redView.bottomAnchor,
-                    constant: spacing),
-      guide.bottomAnchor
-        .constraint(equalTo: greenView.bottomAnchor,
-                    constant: padding),
-      
-      redView.heightAnchor
-        .constraint(equalTo: greenView.heightAnchor)
+      helloButton.leadingAnchor
+        .constraint(equalTo: guide.leadingAnchor),
+      helloButton.topAnchor
+        .constraint(equalTo: guide.topAnchor)
     ])
   }
   
 }
 
 
-private extension UIView {
-  static func makeView(color: UIColor) -> UIView {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = color
-    return view
+extension UIButton {
+  static func customButton(
+    title: String, titleColor: UIColor,
+    tintColor: UIColor, background: UIImage?
+  ) -> UIButton {
+    let button = UIButton(type: .custom)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle(title, for: .normal)
+    button.setTitleColor(titleColor, for: .normal)
+
+    button.setBackgroundImage(background, for: .normal)
+    button.tintColor = tintColor
+    
+    // (w:41 h:22)
+    print("Before contentEdgeInsets - button.intrinsicContentSize: \(button.intrinsicContentSize)")
+    
+    button.contentEdgeInsets =
+      UIEdgeInsets(top: 10, left: 20,
+                   bottom: 10, right: 20)
+
+    //
+    button.layer.cornerRadius = 10.0
+    
+    // (w:81 h:42)
+    print("Before contentEdgeInsets - button.intrinsicContentSize: \(button.intrinsicContentSize)")
+    
+    return button
   }
 }
+
 
